@@ -1,0 +1,8 @@
+{
+    "name": "tpadev repository",
+    "description": "Custom ID repository.",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/tpadev/csidext/builds/plugins.json"
+    ]
+}
