@@ -12,11 +12,18 @@ import java.net.URI
 import java.util.Base64
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+
 
 
 class XilidProvider : MainAPI() {
-    override var mainUrl = "https://idlixian.com"
-    private var directUrl = mainUrl
+    override var mainUrl = listOf(
+		'h','t','t','p','s',':','/','/',
+		'i','d','l','i','x','i','a','n','.','c','o','m',).joinToString("")
+    
+	private var directUrl = mainUrl
     override var name = "Xilid"
     override val hasMainPage = true
     override var lang = "id"
@@ -223,7 +230,63 @@ class XilidProvider : MainAPI() {
         }
     }
 
-    override suspend fun loadLinks(
+
+override suspend fun loadLinks(
+    data: String,
+    isCasting: Boolean,
+    subtitleCallback: (SubtitleFile) -> Unit,
+    callback: (ExtractorLink) -> Unit
+): Boolean {
+
+    val document = app.get(data).document
+    val elements = document.select("ul#playeroptionsul > li").map {
+        Triple(
+            it.attr("data-post"),
+            it.attr("data-nume"),
+            it.attr("data-type")
+        )
+    }
+
+    // replaces apmap
+    kotlinx.coroutines.coroutineScope {
+        elements.map { (id, nume, type) ->
+            async {
+                val json = app.post(
+                    url = "$directUrl/wp-admin/admin-ajax.php",
+                    data = mapOf(
+                        "action" to "doo_player_ajax",
+                        "post" to id,
+                        "nume" to nume,
+                        "type" to type
+                    ),
+                    referer = data,
+                    headers = mapOf("Accept" to "*/*", "X-Requested-With" to "XMLHttpRequest")
+                ).parsedSafe<ResponseHash>() ?: return@async
+
+                val metrix = AppUtils.parseJson<AesData>(json.embed_url).m
+                val password = createKey(json.key, metrix)
+                val decrypted = AesHelper.cryptoAESHandler(
+                    json.embed_url,
+                    password.toByteArray(),
+                    false
+                )?.fixBloat() ?: return@async
+
+                when {
+                    !decrypted.contains("youtube") ->
+                        getUrl(decrypted, "$directUrl/", subtitleCallback, callback)
+                    else -> return@async
+                }
+            }
+        }.awaitAll() // waits for all async jobs
+    }
+
+    return true
+}
+
+
+
+
+/*    override suspend fun loadLinks(
         data: String,
         isCasting: Boolean,
         subtitleCallback: (SubtitleFile) -> Unit,
@@ -241,7 +304,9 @@ class XilidProvider : MainAPI() {
             val json = app.post(
                 url = "$directUrl/wp-admin/admin-ajax.php", data = mapOf(
                     "action" to "doo_player_ajax", "post" to id, "nume" to nume, "type" to type
-                ), referer = data, headers = mapOf("Accept" to "*/*", "X-Requested-With" to "XMLHttpRequest")
+                ), referer = data, headers = mapOf("Accept" to "*/
+				/*
+				*", "X-Requested-With" to "XMLHttpRequest")
             ).parsedSafe<ResponseHash>() ?: return@apmap
             val metrix = AppUtils.parseJson<AesData>(json.embed_url).m
             val password = createKey(json.key, metrix)
@@ -255,7 +320,7 @@ class XilidProvider : MainAPI() {
 
         return true
     }
-
+*/
 
     private fun addBase64Padding(b64String: String): String {
         val padding = (4 - b64String.length % 4) % 4
