@@ -1,0 +1,67 @@
+[
+    {
+        "iconUrl": "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://moviebox.ng/&size=128",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/tpadev/csidext",
+        "fileSize": 63819,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "tpadev"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "Movie",
+            "TvSeries",
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 1,
+        "internalName": "MBoxProvider",
+        "url": "https://raw.githubusercontent.com/tpadev/csidext/builds/MBoxProvider.cs3",
+        "name": "MBoxProvider"
+    },
+    {
+        "iconUrl": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://ww03.pencurimovie.bond&size=128",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/tpadev/csidext",
+        "fileSize": 12698,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "tpadev"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 1,
+        "internalName": "Pencurimovie",
+        "url": "https://raw.githubusercontent.com/tpadev/csidext/builds/Pencurimovie.cs3",
+        "name": "Pencurimovie"
+    },
+    {
+        "iconUrl": "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://idlixian.com&size=128",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/tpadev/csidext",
+        "fileSize": 25312,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "tpadev"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie",
+            "Anime",
+            "AsianDrama"
+        ],
+        "version": 2,
+        "internalName": "XilidProvider",
+        "description": "Xilid with actors & recommendation",
+        "url": "https://raw.githubusercontent.com/tpadev/csidext/builds/XilidProvider.cs3",
+        "name": "XilidProvider"
+    }
+]
