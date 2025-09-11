@@ -61,8 +61,6 @@ class XilidProvider : MainAPI() {
 
     override val mainPage = mainPageOf(
         "$mainUrl/" to "Featured",
-        "$mainUrl/trending/page/?get=movies" to "Trending Movies",
-        "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
         "$mainUrl/network/netflix/page/" to "Netflix",
         "$mainUrl/network/amazon/page/" to "Amazon",
         "$mainUrl/network/apple-tv/page/" to "AppleTV+",
@@ -73,6 +71,8 @@ class XilidProvider : MainAPI() {
         "$mainUrl/genre/drama-china/page/" to "Drama China",
         "$mainUrl/genre/drama-thai/page/" to "Drama Thailand",
 
+//        "$mainUrl/trending/page/?get=movies" to "Trending Movies",
+//        "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
 //        "$mainUrl/trending/page/?get=movies" to "Trending Movies",
 //        "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
 //        "$mainUrl/movie/page/" to "Movie Terbaru",
