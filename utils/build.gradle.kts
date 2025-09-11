@@ -1,0 +1,3 @@
+android {
+    namespace = "Utils"
+}
