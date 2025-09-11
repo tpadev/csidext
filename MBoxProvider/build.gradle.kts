@@ -9,7 +9,8 @@ cloudstream {
     language = "id"
     // All of these properties are optional, you can safely remove them
 
-    // description = "Lorem Ipsum"
+    // description = "Mbox"
+    language = "id"
     authors = listOf("tpadev")
 
     /**
@@ -30,5 +31,5 @@ cloudstream {
     )
 
     iconUrl =
-        "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://moviebox.ng/&size=64"
+        "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://moviebox.ng/&size=128"
 }

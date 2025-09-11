@@ -7,9 +7,9 @@ android {
 
 cloudstream {
     language = "id"
-    // All of these properties are optional, you can safely remove them
+    //All of these properties are optional, you can safely remove them
 
-    // description = "Lorem Ipsum"
+    //description = "Xilid"
      authors = listOf("tpadev")
 
     /**
@@ -27,5 +27,5 @@ cloudstream {
         "AsianDrama",
     )
 
-    iconUrl = "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://idlixian.com&size=64"
+    iconUrl = "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://idlixian.com&size=128"
 }
