@@ -191,7 +191,8 @@ class XilidProvider : MainAPI() {
         }
 
         return if (tvType == TvType.TvSeries) {
-            val episodes = document.select("ul.episodios > li").map {
+            val description = document.selectFirst("div.content")?.text()?.trim().toString()
+			val episodes = document.select("ul.episodios > li").map {
                 val href = it.select("a").attr("href")
                 val name = fixTitle(it.select("div.episodiotitle > a").text().trim())
                 val image = it.select("div.imagen > img").attr("src")
