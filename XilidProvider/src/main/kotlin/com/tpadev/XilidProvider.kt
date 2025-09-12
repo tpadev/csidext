@@ -19,10 +19,11 @@ import kotlinx.coroutines.awaitAll
 
 
 class XilidProvider : MainAPI() {
-    override var mainUrl = listOf(
-		'h','t','t','p','s',':','/','/',
-		'i','d','l','i','x','i','a','n','.','c','o','m',).joinToString("")
-    
+    //override var mainUrl = listOf(
+	//	'h','t','t','p','s',':','/','/',
+	//	'i','d','l','i','x','i','a','n','.','c','o','m',).joinToString("")
+
+	override var mainUrl = "https://tv7.idlixku.com"
 	private var directUrl = mainUrl
     override var name = "Xilid"
     override val hasMainPage = true
