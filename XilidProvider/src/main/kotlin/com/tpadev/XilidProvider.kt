@@ -170,7 +170,7 @@ class XilidProvider : MainAPI() {
             document.selectFirst("div.data > h1")?.text()?.replace(Regex("\\(\\d{4}\\)"), "")
                 ?.trim().toString()
         //val poster = document.select("div.poster > img").attr("src").toString()
-		val poster = document.select("div.poster > img").attr("src").toString().replace("w185", "w342")
+		val poster = document.select("div.poster > img").attr("src").toString().replace("w185", "w500")
         val tags = document.select("div.sgeneros > a").map { it.text() }
 
         val year = Regex(",\\s?(\\d+)").find(
