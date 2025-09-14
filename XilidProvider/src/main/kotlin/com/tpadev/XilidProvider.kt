@@ -23,7 +23,11 @@ class XilidProvider : MainAPI() {
 	//	'h','t','t','p','s',':','/','/',
 	//	'i','d','l','i','x','i','a','n','.','c','o','m',).joinToString("")
 
-	override var mainUrl = "https://tv7.idlixku.com"
+	override var mainUrl = listOf(
+		'h','t','t','p','s',':','/','/',
+		't','v','7','.','i','d','l','i','x','k','u','.','c','o','m').joinToString("")
+
+	//override var mainUrl = "https://tv7.idlixku.com"
 	private var directUrl = mainUrl
     override var name = "Xilid"
     override val hasMainPage = true
@@ -165,7 +169,8 @@ class XilidProvider : MainAPI() {
         val title =
             document.selectFirst("div.data > h1")?.text()?.replace(Regex("\\(\\d{4}\\)"), "")
                 ?.trim().toString()
-        val poster = document.select("div.poster > img").attr("src").toString()
+        //val poster = document.select("div.poster > img").attr("src").toString()
+		val poster = document.select("div.poster > img").attr("src").replace("w185", "w342").toString()
         val tags = document.select("div.sgeneros > a").map { it.text() }
 
         val year = Regex(",\\s?(\\d+)").find(
