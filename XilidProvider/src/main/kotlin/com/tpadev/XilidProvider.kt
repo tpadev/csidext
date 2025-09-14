@@ -27,13 +27,13 @@ class XilidProvider : MainAPI() {
 		'h','t','t','p','s',':','/','/',
 		't','v','7','.','i','d','l','i','x','k','u','.','c','o','m').joinToString("")
 
-	//override var mainUrl = "https://tv7.idlixku.com"
+	//override var mainUrl = "https://"
 	private var directUrl = mainUrl
     override var name = "Xilid"
     override val hasMainPage = true
     override var lang = "id"
     override val hasDownloadSupport = true
-    private val cloudflareKiller by lazy { CloudflareKiller() }
+    //private val cloudflareKiller by lazy { CloudflareKiller() }
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -170,7 +170,7 @@ class XilidProvider : MainAPI() {
             document.selectFirst("div.data > h1")?.text()?.replace(Regex("\\(\\d{4}\\)"), "")
                 ?.trim().toString()
         //val poster = document.select("div.poster > img").attr("src").toString()
-		val poster = document.select("div.poster > img").attr("src").replace("w185", "w342").toString()
+		val poster = document.select("div.poster > img").attr("src").toString().replace("w185", "w342")
         val tags = document.select("div.sgeneros > a").map { it.text() }
 
         val year = Regex(",\\s?(\\d+)").find(
