@@ -1,4 +1,8 @@
 # `Cloudstream3 ID Extension`
+Add this to your extension repo
+
+https://raw.githubusercontent.com/tpadev/csidext/builds/repo.json
+
 # `Cloudstream3 Plugin Repo Template`
 
 Template for a [Cloudstream3](https://github.com/recloudstream) plugin repo
