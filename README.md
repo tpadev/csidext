@@ -1,5 +1,5 @@
 # `Cloudstream3 ID Extension`
-Add this to your extension repo
+Add this link to your extension repository
 
 https://raw.githubusercontent.com/tpadev/csidext/builds/repo.json
 
