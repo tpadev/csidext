@@ -188,8 +188,8 @@ class XilidProvider : MainAPI() {
 
         val recommendation = document.select("div.owl-item").mapNotNull { 
             val recName =
-                it.selectFirst("a")?.attr("href").toString().removeSuffix("/").split("/").last()
-            val recHref = it.selectFirst("a").attr("href")
+                it.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
+            val recHref = it.selectFirst("a")!!.attr("href")
             val recPosterUrl = it.selectFirst("img").attr("src").toString().orEmpty()
             newTvSeriesSearchResponse(recName, recHref, TvType.TvSeries) {
                 this.posterUrl = recPosterUrl
