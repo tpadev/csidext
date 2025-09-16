@@ -186,15 +186,15 @@ class XilidProvider : MainAPI() {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
         }
 
-        val recommendations = document.select("div.owl-item").map {
-            val recName =
-                it.selectFirst("a")?.attr("href").toString().removeSuffix("/").split("/").last()
-            val recHref = it.selectFirst("a")?.attr("href")
-            val recPosterUrl = it.selectFirst("img")?.attr("src").toString().orEmpty()
-            newTvSeriesSearchResponse(recName, recHref, TvType.TvSeries) {
-                this.posterUrl = recPosterUrl
-            }
-        }
+        val recommendation = document.select("div.owl-item").mapNotNull { it.toSearchResult() }
+//            val recName =
+//                it.selectFirst("a")?.attr("href").toString().removeSuffix("/").split("/").last()
+//            val recHref = it.selectFirst("a")?.attr("href")
+//            val recPosterUrl = it.selectFirst("img")?.attr("src").toString().orEmpty()
+//            newTvSeriesSearchResponse(recName, recHref, TvType.TvSeries) {
+//                this.posterUrl = recPosterUrl
+//            }
+//        }
 
         return if (tvType == TvType.TvSeries) {
 			val description = document.select("div.content center p").joinToString("\n") { 
