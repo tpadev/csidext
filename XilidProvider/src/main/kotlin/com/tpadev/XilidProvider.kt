@@ -222,7 +222,7 @@ class XilidProvider : MainAPI() {
                 this.tags = tags
                 this.rating = rating
                 addActors(actors)
-                this.recommendations = recommendations
+                this.recommendations = recommendation
                 addTrailer(trailer)
             }
         } else {
@@ -233,7 +233,7 @@ class XilidProvider : MainAPI() {
                 this.tags = tags
                 this.rating = rating
                 addActors(actors)
-                this.recommendations = recommendations
+                this.recommendations = recommendation
                 addTrailer(trailer)
             }
         }
