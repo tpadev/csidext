@@ -151,7 +151,7 @@ class XilidProvider : MainAPI() {
 		val recName = this.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
         val recHref = this.selectFirst("a")!!.attr("href")
         val recPosterUrl = this.selectFirst("img")?.attr("src").orEmpty()
-		return newMovieSearchResponse(recName, recHref, TvType.TvSeries) {
+		return newMovieSearchResponse(recName, recHref, TvType.Movie) {
                 this.posterUrl = recPosterUrl
             }
 
