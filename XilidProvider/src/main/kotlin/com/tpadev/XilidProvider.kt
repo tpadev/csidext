@@ -147,6 +147,16 @@ class XilidProvider : MainAPI() {
 
     }
 
+	private fun Element.toRecResult(): SearchResponse {
+		val recName = it.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
+        val recHref = it.selectFirst("a")!!.attr("href")
+        val recPosterUrl = it.selectFirst("img")!!.attr("src").toString()
+		return newMovieSearchResponse(recName, recHref, TvType.Movie) {
+                this.posterUrl = recPosterUrl
+            }
+
+	}
+
     override suspend fun search(query: String): List<SearchResponse> {
         val req = app.get("$mainUrl/search/$query")
         mainUrl = getBaseUrl(req.url)
@@ -186,17 +196,9 @@ class XilidProvider : MainAPI() {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
         }
 
-        val recommendation = document.select("div.owl-item").mapNotNull { 
-            val recName =
-                it.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
-            val recHref = it.selectFirst("a")!!.attr("href")
-            val recPosterUrl = it.selectFirst("img")!!.attr("src").toString()
-            return newMovieSearchResponse(recName, recHref, TvTypeTag) {
-                this.posterUrl = recPosterUrl
-            }
-        }
+        val recommendation = document.select("div.owl-item").mapNotNull { it.toRecResult() }
 
-        return if (tvType == TvType.TvSeries) {
+		return if (tvType == TvType.TvSeries) {
 			val description = document.select("div.content center p").joinToString("\n") { 
 				it.text().trim() }
 				.trim()
