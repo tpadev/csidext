@@ -194,7 +194,7 @@ class XilidProvider : MainAPI() {
     		newMovieSearchResponse(
 				recName, 
 				recHref, 
-				if (recHref.contains("/movie/")) TvType.Movie else TvType.TvMovie,
+				if (recHref.contains("/movie/")) TvType.Movie else TvType.Movie,
 				false
 			) {
         		this.posterUrl = recPosterUrl
