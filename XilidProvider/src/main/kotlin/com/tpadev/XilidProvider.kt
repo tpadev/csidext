@@ -150,7 +150,7 @@ class XilidProvider : MainAPI() {
 	private fun Element.toRecResult(): SearchResponse {
 		val recName = this.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
         val recHref = this.selectFirst("a")!!.attr("href")
-        val recPosterUrl = this.selectFirst("img").attr("src").toString()
+        val recPosterUrl = this.selectFirst!!("img").attr("src").toString()
 		return newMovieSearchResponse(recName, recHref, TvType.Movie) {
                 this.posterUrl = recPosterUrl
             }
@@ -198,7 +198,7 @@ class XilidProvider : MainAPI() {
 
         val recommendation = document.select("div.owl-item").mapNotNull { it.toRecResult() }
 
-		return if (tvType == TvType.TvSeries) {
+		return if (tvTypeTag == TvType.TvSeries) {
 			val description = document.select("div.content center p").joinToString("\n") { 
 				it.text().trim() }
 				.trim()
