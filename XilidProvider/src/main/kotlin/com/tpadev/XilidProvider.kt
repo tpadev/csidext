@@ -201,6 +201,8 @@ class XilidProvider : MainAPI() {
     		}
 		}
 
+		println(recommendation)
+
 		return if (tvTypeTag == TvType.TvSeries) {
 			val description = document.select("div.content center p").joinToString("\n") { 
 				it.text().trim() }
