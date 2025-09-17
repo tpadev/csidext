@@ -176,7 +176,7 @@ class XilidProvider : MainAPI() {
         val year = Regex(",\\s?(\\d+)").find(
             document.select("span.date").text().trim()
         )?.groupValues?.get(1).toString().toIntOrNull()
-        val tvType = if (document.select("ul#section > li:nth-child(1)").text().contains("Episodes")
+        val tvTypeTag = if (document.select("ul#section > li:nth-child(1)").text().contains("Episodes")
         ) TvType.TvSeries else TvType.Movie
         val description = document.select("div.wp-content > p").text().trim()
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
@@ -191,7 +191,7 @@ class XilidProvider : MainAPI() {
                 it.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
             val recHref = it.selectFirst("a")!!.attr("href")
             val recPosterUrl = it.selectFirst("img")!!.attr("src").toString()
-            return newMovieSearchResponse(recName, recHref, TvType) {
+            return newMovieSearchResponse(recName, recHref, TvTypeTag) {
                 this.posterUrl = recPosterUrl
             }
         }
