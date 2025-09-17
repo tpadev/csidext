@@ -188,8 +188,8 @@ class XilidProvider : MainAPI() {
         }
 
         val recommendation = document.select("#single_relacionados div.owl-item").mapNotNull {
-    		val recHref = it.selectFirst("a")?.attr("href") ?: return@mapNotNull null
-    		val recName = recHref.removeSuffix("/").split("/").lastOrNull() ?: return@mapNotNull null
+    		val recName = it.selectFirst("img")?.attr("alt") ?: return@mapNotNull null
+			val recHref = it.selectFirst("a")?.attr("href") ?: return@mapNotNull null
     		val recPosterUrl = it.selectFirst("img")?.attr("src")
     		newMovieSearchResponse(
 				recName, 
