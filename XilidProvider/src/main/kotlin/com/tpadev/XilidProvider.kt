@@ -66,6 +66,7 @@ class XilidProvider : MainAPI() {
 
     override val mainPage = mainPageOf(
         "$mainUrl/" to "Featured",
+        "$mainUrl/movie/page/" to "Latest Movie",		
         "$mainUrl/network/netflix/page/" to "Netflix",
         "$mainUrl/network/amazon/page/" to "Amazon",
         "$mainUrl/network/apple-tv/page/" to "AppleTV+",
@@ -80,7 +81,6 @@ class XilidProvider : MainAPI() {
 //        "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
 //        "$mainUrl/trending/page/?get=movies" to "Trending Movies",
 //        "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
-//        "$mainUrl/movie/page/" to "Movie Terbaru",
 //        "$mainUrl/tvseries/page/" to "TV Series Terbaru",
 //        "$mainUrl/genre/anime/page/" to "Anime",
 
@@ -151,6 +151,7 @@ class XilidProvider : MainAPI() {
 		val recName = this.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
         val recHref = this.selectFirst("a")!!.attr("href")
         val recPosterUrl = this.selectFirst("img")?.attr("src").orEmpty()
+		println(recName)
 		return newMovieSearchResponse(recName, recHref, TvType.Movie) {
                 this.posterUrl = recPosterUrl
             }
