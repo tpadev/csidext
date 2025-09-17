@@ -150,7 +150,7 @@ class XilidProvider : MainAPI() {
 	private fun Element.toRecResult(): SearchResponse {
 		val recName = this.selectFirst("a")!!.attr("href").toString().removeSuffix("/").split("/").last()
         val recHref = this.selectFirst("a")!!.attr("href")
-        val recPosterUrl = this.select!!("img").attr("src").toString()
+        val recPosterUrl = this.selectFirst("img")?.attr("src").orEmpty()
 		return newMovieSearchResponse(recName, recHref, TvType.TvSeries) {
                 this.posterUrl = recPosterUrl
             }
