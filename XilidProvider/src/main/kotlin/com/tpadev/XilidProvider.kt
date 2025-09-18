@@ -235,6 +235,11 @@ class XilidProvider : MainAPI() {
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
+
+				this.recommendations.forEach { rec ->
+    				println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
+				}
+
             }
         } else {
             newMovieLoadResponse(title, url, TvType.Movie, url) {
@@ -246,6 +251,11 @@ class XilidProvider : MainAPI() {
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
+
+				this.recommendations.forEach { rec ->
+    				println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
+				}
+				
             }
         }
     }
