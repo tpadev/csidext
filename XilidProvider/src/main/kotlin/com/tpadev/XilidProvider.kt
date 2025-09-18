@@ -236,7 +236,7 @@ class XilidProvider : MainAPI() {
                 this.recommendations = recommendation
                 addTrailer(trailer)
 
-				this.recommendations.forEach { rec ->
+				recommendations.forEach { rec ->
     				println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
 				}
 
@@ -252,7 +252,7 @@ class XilidProvider : MainAPI() {
                 this.recommendations = recommendation
                 addTrailer(trailer)
 
-				this.recommendations.forEach { rec ->
+				recommendations.forEach { rec ->
     				println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
 				}
 				
