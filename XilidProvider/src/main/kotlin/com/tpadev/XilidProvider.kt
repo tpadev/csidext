@@ -181,8 +181,7 @@ class XilidProvider : MainAPI() {
         ) TvType.TvSeries else TvType.Movie
         val description = document.select("div.wp-content > p").text().trim()
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
-        val score =
-            document.selectFirst("span.dt_rating_vgs")?.text()?.toRatingInt()
+        val rating =document.selectFirst("span.dt_rating_vgs")?.text()?.toRatingInt()
         val actors = document.select("div.persons > div[itemprop=actor]").map {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
         }
