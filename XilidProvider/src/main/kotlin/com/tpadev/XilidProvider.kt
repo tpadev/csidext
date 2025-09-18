@@ -191,7 +191,8 @@ class XilidProvider : MainAPI() {
     		val recName = it.selectFirst("img")?.attr("alt")?.replace(Regex("\\(\\d{4}\\)"), "")?.trim().toString() ?: return@mapNotNull null
 			val recHref = it.selectFirst("a")?.attr("href") ?: return@mapNotNull null
     		val recPosterUrl = it.selectFirst("img")?.attr("src")
-    		newMovieSearchResponse(
+			println(recName)
+			newMovieSearchResponse(
 				recName, 
 				recHref, 
 				if (recHref.contains("/movie/")) TvType.Movie else TvType.TvSeries,
@@ -200,6 +201,7 @@ class XilidProvider : MainAPI() {
         		this.posterUrl = recPosterUrl
     		}
 		}
+
 
 		recommendation.forEach { rec ->
     		println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
