@@ -19,13 +19,13 @@ import kotlinx.coroutines.awaitAll
 
 
 class XilidProvider : MainAPI() {
-    //override var mainUrl = listOf(
-	//	'h','t','t','p','s',':','/','/',
-	//	'i','d','l','i','x','i','a','n','.','c','o','m',).joinToString("")
-
-	override var mainUrl = listOf(
+    override var mainUrl = listOf(
 		'h','t','t','p','s',':','/','/',
-		't','v','7','.','i','d','l','i','x','k','u','.','c','o','m').joinToString("")
+		'i','d','l','i','x','i','a','n','.','c','o','m',).joinToString("")
+
+	//override var mainUrl = listOf(
+	//	'h','t','t','p','s',':','/','/',
+	//	't','v','7','.','i','d','l','i','x','k','u','.','c','o','m').joinToString("")
 
 	//override var mainUrl = "https://"
 	private var directUrl = mainUrl
@@ -66,7 +66,7 @@ class XilidProvider : MainAPI() {
 
     override val mainPage = mainPageOf(
         "$mainUrl/" to "Featured",
-        "$mainUrl/movie/page/" to "Latest Movie",		
+        "$mainUrl/movie/page/" to "Latest Movie added",		
         "$mainUrl/network/netflix/page/" to "Netflix",
         "$mainUrl/network/amazon/page/" to "Amazon",
         "$mainUrl/network/apple-tv/page/" to "AppleTV+",
@@ -181,7 +181,7 @@ class XilidProvider : MainAPI() {
         ) TvType.TvSeries else TvType.Movie
         val description = document.select("div.wp-content > p").text().trim()
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
-        val rating =
+        val score =
             document.selectFirst("span.dt_rating_vgs")?.text()?.toRatingInt()
         val actors = document.select("div.persons > div[itemprop=actor]").map {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
@@ -225,7 +225,7 @@ class XilidProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.rating = rating
+                this.score = rating
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
@@ -236,7 +236,7 @@ class XilidProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.rating = rating
+                this.score = rating
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
