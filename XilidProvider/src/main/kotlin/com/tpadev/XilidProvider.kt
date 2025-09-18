@@ -181,7 +181,9 @@ class XilidProvider : MainAPI() {
         ) TvType.TvSeries else TvType.Movie
         val description = document.select("div.wp-content > p").text().trim()
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
-        val rating =document.selectFirst("span.dt_rating_vgs")?.text()?.toRatingInt()
+        
+		// need to update to new method score
+		val rating = document.selectFirst("span.dt_rating_vgs")?.text()?.toRatingInt()
         val actors = document.select("div.persons > div[itemprop=actor]").map {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
         }
@@ -224,7 +226,7 @@ class XilidProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.score = rating
+                this.rating = rating
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
@@ -235,7 +237,7 @@ class XilidProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.score = rating
+                this.rating = rating
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
