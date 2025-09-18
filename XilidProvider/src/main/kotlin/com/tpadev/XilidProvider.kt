@@ -187,7 +187,7 @@ class XilidProvider : MainAPI() {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
         }
 
-        val recommendation = document.select("#single_relacionados div.owl-item").mapNotNull {
+        val recommendation = document.select("div.sbox.srelacionados div.owl-item").mapNotNull {
     		val recName = it.selectFirst("img")?.attr("alt")?.replace(Regex("\\(\\d{4}\\)"), "")?.trim().toString() ?: return@mapNotNull null
 			val recHref = it.selectFirst("a")?.attr("href") ?: return@mapNotNull null
     		val recPosterUrl = it.selectFirst("img")?.attr("src")
