@@ -187,11 +187,10 @@ class XilidProvider : MainAPI() {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
         }
 
-        val recommendation = document.select("div.sbox.srelacionados div.owl-item").mapNotNull {
+        val recommendation = document.select("div.sbox.srelacionados a").mapNotNull {
     		val recName = it.selectFirst("img")?.attr("alt")?.replace(Regex("\\(\\d{4}\\)"), "")?.trim().toString() ?: return@mapNotNull null
-			val recHref = it.selectFirst("a")?.attr("href") ?: return@mapNotNull null
+			val recHref = it.selectFirst.attr("href")? ?: return@mapNotNull null
     		val recPosterUrl = it.selectFirst("img")?.attr("src")
-			println(recName)
 			newMovieSearchResponse(
 				recName, 
 				recHref, 
@@ -200,11 +199,6 @@ class XilidProvider : MainAPI() {
 			) {
         		this.posterUrl = recPosterUrl
     		}
-		}
-
-
-		recommendation.forEach { rec ->
-    		println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
 		}
 
 		return if (tvTypeTag == TvType.TvSeries) {
@@ -235,11 +229,6 @@ class XilidProvider : MainAPI() {
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
-
-				recommendations.forEach { rec ->
-    				println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
-				}
-
             }
         } else {
             newMovieLoadResponse(title, url, TvType.Movie, url) {
@@ -251,11 +240,6 @@ class XilidProvider : MainAPI() {
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
-
-				recommendations.forEach { rec ->
-    				println("Name: ${rec.name}, Url: ${rec.url}, Poster: ${rec.posterUrl}")
-				}
-				
             }
         }
     }
