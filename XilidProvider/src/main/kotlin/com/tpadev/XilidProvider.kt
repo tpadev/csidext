@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
+import com.lagradost.cloudstream3.LoadResponse.Companion.addScore
 import com.lagradost.cloudstream3.extractors.helper.AesHelper
 import com.lagradost.cloudstream3.network.CloudflareKiller
 import com.lagradost.cloudstream3.utils.*
@@ -183,8 +184,8 @@ class XilidProvider : MainAPI() {
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
         
 		// need to update to new method score
-		val rating = document.selectFirst("span.dt_rating_vgs")?.text()?.toRatingInt()
-        val actors = document.select("div.persons > div[itemprop=actor]").map {
+		val rating = document.selectFirst("span.dt_rating_vgs")?.text()
+		val actors = document.select("div.persons > div[itemprop=actor]").map {
             Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
         }
 
@@ -226,7 +227,7 @@ class XilidProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.rating = rating
+                addScore(rating)
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
@@ -237,7 +238,7 @@ class XilidProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.rating = rating
+                addScore(rating)
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
