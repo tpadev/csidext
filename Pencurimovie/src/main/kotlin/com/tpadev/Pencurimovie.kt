@@ -93,7 +93,7 @@ class Pencurimovie : MainAPI() {
                             .toIntOrNull()
                         episodes.add(newEpisode(href)
                             {
-                                this.episode=Rawepisode
+                                this.episode=rawepisode
                                 this.name=name
                                 this.season=season
                             }
