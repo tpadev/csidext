@@ -91,8 +91,12 @@ class Pencurimovie : MainAPI() {
                             .substringBefore("-")
                             .trim()
                             .toIntOrNull()
-                        episodes.add(
-                            Episode(data = href, episode = rawepisode, name = name, season = season)
+                        episodes.add(newEpisode(href)
+                            {
+                                this.episode=Rawepisode
+                                this.name=name
+                                this.season=season
+                            }
                         )
                     }
             }
