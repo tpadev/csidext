@@ -94,7 +94,7 @@ class Pencurimovie : MainAPI() {
                                     .trim()
                                     .toIntOrNull()
                     episodes.add(
-                            Episode(data = href, episode = rawepisode, name = name, season = season)
+                            newEpisode(data = href, episode = rawepisode, name = name, season = season)
                     )
                 }
             }
