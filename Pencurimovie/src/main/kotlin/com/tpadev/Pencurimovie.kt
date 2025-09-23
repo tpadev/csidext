@@ -8,7 +8,7 @@ import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
 
 class Pencurimovie : MainAPI() {
-    override var mainUrl = "https://ww73.pencurimovie.bond"
+    override var mainUrl = "https://ww93.pencurimovie.bond"
     override var name = "Pencurimovie"
     override val hasMainPage = true
     override var lang = "id"
@@ -80,23 +80,21 @@ class Pencurimovie : MainAPI() {
         return if (tvtag == TvType.TvSeries) {
             val episodes = mutableListOf<Episode>()
             document.select("div.tvseason").amap { info ->
-                val season =
-                        info.select("strong").text().substringAfter("Season").trim().toIntOrNull()
-                info.select("div.les-content a").forEach {
-                    Log.d("Phis", "$it")
-                    val name = it.select("a").text().substringAfter("-").trim()
-                    val href = it.select("a").attr("href")
-                    val rawepisode =
-                            it.select("a")
-                                    .text()
-                                    .substringAfter("Episode")
-                                    .substringBefore("-")
-                                    .trim()
-                                    .toIntOrNull()
-                    episodes.add(
-                            newEpisode(data = href, episode = rawepisode, name = name, season = season)
-                    )
-                }
+                val season = info.select("strong").text().substringAfter("Season").trim().toIntOrNull()
+                        info.select("div.les-content a").forEach {
+                        Log.d("Phis", "$it")
+                        val name = it.select("a").text().substringAfter("-").trim()
+                        val href = it.select("a").attr("href")
+                        val rawepisode = it.select("a")
+                            .text()
+                            .substringAfter("Episode")
+                            .substringBefore("-")
+                            .trim()
+                            .toIntOrNull()
+                        episodes.add(
+                            Episode(data = href, episode = rawepisode, name = name, season = season)
+                        )
+                    }
             }
 
             newTvSeriesLoadResponse(title, url, TvType.TvSeries, episodes) {
