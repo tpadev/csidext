@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.convertValue
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.APIHolder
 import com.lagradost.cloudstream3.AnimeLoadResponse
 import com.lagradost.cloudstream3.DubStatus
@@ -19,6 +20,9 @@ import com.lagradost.cloudstream3.ErrorLoadingException
 import com.lagradost.cloudstream3.HomePageResponse
 import com.lagradost.cloudstream3.LoadResponse.Companion.addAniListId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addMalId
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
+import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
+import com.lagradost.cloudstream3.LoadResponse.Companion.addScore
 import com.lagradost.cloudstream3.MainAPI
 import com.lagradost.cloudstream3.MainPageRequest
 import com.lagradost.cloudstream3.SearchResponse
@@ -38,6 +42,7 @@ import com.lagradost.cloudstream3.newAnimeSearchResponse
 import com.lagradost.cloudstream3.newEpisode
 import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.newMovieSearchResponse
+
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.ExtractorLinkType
 import com.lagradost.cloudstream3.utils.VideoDownloadHelper
@@ -117,7 +122,7 @@ class MBoxProvider : MainAPI() {
             )
         )
 
-        println(res.text)
+        //println(res.text)
         val data = res.parsed<HomeSearch>()
         return newHomePageResponse(request.name, data.data?.subjectList?.map {
             newMovieSearchResponse(
@@ -267,13 +272,13 @@ class MBoxProvider : MainAPI() {
             data.resource?.seasons == null || data.resource.seasons.find { it?.maxEp == 0 || it?.se == 0 } != null
         val type = getTvType(data.subject?.genre, isMovie)
         val year = data.subject?.releaseDate?.getYear()
-        val tracker = if (data.subject?.countryName === "Japan")
-            APIHolder.getTracker(
-                listOf(data.subject?.title ?: ""),
-                TrackerType.getTypes(type),
-                year,
-                true
-            ) else null
+//        val tracker = if (data.subject?.countryName === "Japan")
+//            APIHolder.getTracker(
+//                listOf(data.subject?.title ?: ""),
+//                TrackerType.getTypes(type),
+//                year,
+//                true
+//            ) else null
 
         val episodes = mutableListOf<Episode>()
         val seasons = mutableListOf<SeasonData>()
