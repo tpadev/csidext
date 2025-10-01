@@ -272,7 +272,15 @@ class MBoxProvider : MainAPI() {
             data.resource?.seasons == null || data.resource.seasons.find { it?.maxEp == 0 || it?.se == 0 } != null
         val type = getTvType(data.subject?.genre, isMovie)
         val year = data.subject?.releaseDate?.getYear()
-        val 
+        val actors = data.starsItem
+                        ?.filterNotNull()
+                        ?.take(5)
+                        ?.map {
+                            Actor(
+                                name = it.name ?: "",
+                                image = it.avatarUrl ?: ""
+                            )
+                        } ?: emptyList()
         val tracker = if (data.subject?.countryName === "Japan")
             APIHolder.getTracker(
                 listOf(data.subject?.title ?: ""),
@@ -320,6 +328,7 @@ class MBoxProvider : MainAPI() {
             this.year = year
             addEpisodes(DubStatus.Subbed, episodes)
             addSeasonNames(seasons)
+            addActors(actors)
             plot = data.subject?.description
             println(data.subject?.genre?.split(",")?.map { it.trim() })
             tags = data.subject?.genre?.split(",")?.map { it.trim() }
