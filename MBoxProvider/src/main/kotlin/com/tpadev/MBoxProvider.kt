@@ -273,12 +273,10 @@ class MBoxProvider : MainAPI() {
         val type = getTvType(data.subject?.genre, isMovie)
         val year = data.subject?.releaseDate?.getYear()
         val actors = data.stars
-                    ?.filterNotNull()
-                    ?.mapNotNull { star ->    
-                        val name = star.name ?: return@map null
-                        val actor = Actor(name, image = star.avatarUrl)
-                            actor to star.character
-                    } ?: emptyList()
+            ?.filterNotNull()
+            ?.map {
+                Actor(it.name ?: "", image = it.avatarUrl) to it.character
+            } ?: emptyList()
         val tracker = if (data.subject?.countryName === "Japan")
             APIHolder.getTracker(
                 listOf(data.subject?.title ?: ""),
