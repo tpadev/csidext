@@ -185,9 +185,14 @@ class XilidProvider : MainAPI() {
         
 		// need to update to new method score
 		val rating = document.selectFirst("span.dt_rating_vgs")?.text()
+		
 		val actors = document.select("div.persons > div[itemprop=actor]").map {
-            Actor(it.select("meta[itemprop=name]").attr("content"), it.select("img").attr("src"))
-        }
+    					val name = it.selectFirst("meta[itemprop=name]")?.attr("content").orEmpty()
+    					val imageUrl = it.selectFirst("img")?.attr("src").orEmpty()
+    					val role = it.selectFirst("div.caracter")?.text().orEmpty()
+    					Actor(name, imageUrl) to role
+					}
+
 
         val recommendation = document.select("#single_relacionados article").mapNotNull {
     		val recName = it.selectFirst("img")?.attr("alt")?.replace(Regex("\\(\\d{4}\\)"), "")?.trim().toString() ?: return@mapNotNull null
