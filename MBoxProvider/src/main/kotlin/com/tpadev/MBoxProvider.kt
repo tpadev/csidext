@@ -272,13 +272,14 @@ class MBoxProvider : MainAPI() {
             data.resource?.seasons == null || data.resource.seasons.find { it?.maxEp == 0 || it?.se == 0 } != null
         val type = getTvType(data.subject?.genre, isMovie)
         val year = data.subject?.releaseDate?.getYear()
-//        val tracker = if (data.subject?.countryName === "Japan")
-//            APIHolder.getTracker(
-//                listOf(data.subject?.title ?: ""),
-//                TrackerType.getTypes(type),
-//                year,
-//                true
-//            ) else null
+        val 
+        val tracker = if (data.subject?.countryName === "Japan")
+            APIHolder.getTracker(
+                listOf(data.subject?.title ?: ""),
+                TrackerType.getTypes(type),
+                year,
+                true
+            ) else null
 
         val episodes = mutableListOf<Episode>()
         val seasons = mutableListOf<SeasonData>()
