@@ -274,7 +274,6 @@ class MBoxProvider : MainAPI() {
         val year = data.subject?.releaseDate?.getYear()
         val actors = data.stars
                         ?.filterNotNull()
-                        ?.take(5)
                         ?.map {
                             Actor(
                                 name = it.name ?: "",
@@ -322,7 +321,8 @@ class MBoxProvider : MainAPI() {
             url,
             type
         ) {
-            rating = ((data.subject?.imdbRatingValue?.toFloatOrNull() ?: (0f * 10f))).toInt()
+//            rating = ((data.subject?.imdbRatingValue?.toFloatOrNull() ?: (0f * 10f))).toInt()
+            addScore(data.subject?.imdbRatingValue)
             backgroundPosterUrl = tracker?.cover
             posterUrl = tracker?.image ?: data.metadata?.image
             this.year = year
