@@ -272,7 +272,7 @@ class MBoxProvider : MainAPI() {
             data.resource?.seasons == null || data.resource.seasons.find { it?.maxEp == 0 || it?.se == 0 } != null
         val type = getTvType(data.subject?.genre, isMovie)
         val year = data.subject?.releaseDate?.getYear()
-        val actors = data.starsItem
+        val actors = data.stars
                         ?.filterNotNull()
                         ?.take(5)
                         ?.map {
