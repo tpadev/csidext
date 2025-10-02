@@ -292,11 +292,25 @@ override suspend fun loadLinks(
                     false
                 )?.fixBloat() ?: return@async
 
-                when {
-                    !decrypted.contains("youtube") ->
-                        getUrl(decrypted, "$directUrl/", subtitleCallback, callback)
-                    else -> return@async
-                }
+                println("Decrypted: $decrypted")
+
+        		if (!decrypted.contains("youtube")) {
+            		// Add VLC headers here
+            		callback(
+                		newExtractorLink(
+                    		source = name,
+                    		name = "VLC Stream",
+                    		url = decrypted,
+                    		referer = "$directUrl/",
+                    		quality = Qualities.Unknown.value,
+                    		headers = mapOf(
+                        		"User-Agent" to "VLC/3.0.18 LibVLC/3.0.18",
+                        		"Accept" to "*/*",
+                        		"Connection" to "keep-alive"
+                    		)
+                		)
+            		)
+        		}
             }
         }.awaitAll() // waits for all async jobs
     }
