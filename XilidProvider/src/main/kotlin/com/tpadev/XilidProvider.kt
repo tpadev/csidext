@@ -294,23 +294,11 @@ override suspend fun loadLinks(
 
                 println("Decrypted: $decrypted")
 
-        		if (!decrypted.contains("youtube")) {
-            		// Add VLC headers here
-            		callback(
-                		newExtractorLink(
-                    		source = name,
-                    		name = "VLC Stream",
-                    		url = decrypted,
-                    		referer = "$directUrl/",
-                    		quality = Qualities.Unknown.value,
-                    		headers = mapOf(
-                        		"User-Agent" to "VLC/3.0.18 LibVLC/3.0.18",
-                        		"Accept" to "*/*",
-                        		"Connection" to "keep-alive"
-                    		)
-                		)
-            		)
-        		}
+        		when {
+                    !decrypted.contains("youtube") ->
+                        getUrl(decrypted, "$directUrl/", subtitleCallback, callback)
+                    else -> return@async
+                }
             }
         }.awaitAll() // waits for all async jobs
     }
@@ -411,7 +399,7 @@ override suspend fun loadLinks(
             }
         }
         
-        // println(m3uLink)
+        println(m3uLink)
 
         if (!m3uLink.isNullOrBlank()) {
             M3u8Helper.generateM3u8(
