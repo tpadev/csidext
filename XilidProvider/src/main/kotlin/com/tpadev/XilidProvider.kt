@@ -394,6 +394,7 @@ override suspend fun loadLinks(
         		"Content-Type" to "application/x-www-form-urlencoded; charset=UTF-8",
         		"Origin" to "https://jeniusplay.com"
     			)
+		)
 
         // Replace .txt at the end with .m3u8
         val m3uLink = m3usrc?.let {
