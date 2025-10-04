@@ -260,7 +260,7 @@ override suspend fun loadLinks(
 ): Boolean {
 
     val document = app.get(data).document
-    val elements = document.select("ul#playeroptionsul > li").map {
+    val elements = document.select("ul#playeroptionsul > li#player-option-1").map {
         Triple(
             it.attr("data-post"),
             it.attr("data-nume"),
