@@ -387,8 +387,13 @@ override suspend fun loadLinks(
             url = "https://jeniusplay.com/player/index.php?data=$hash&do=getVideo",
             data = mapOf("hash" to hash, "r" to "$referer"),
             referer = referer,
-            headers = mapOf("X-Requested-With" to "XMLHttpRequest")
-        ).parsed<ResponseSource>().videoSource
+            headers = mapOf(
+        		"Host" to "jeniusplay.com",
+        		"Accept-Encoding" to "gzip, deflate, br, zstd",
+        		"X-Requested-With" to "XMLHttpRequest",
+        		"Content-Type" to "application/x-www-form-urlencoded; charset=UTF-8",
+        		"Origin" to "https://jeniusplay.com"
+    			)
 
         // Replace .txt at the end with .m3u8
         val m3uLink = m3usrc?.let {
