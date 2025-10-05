@@ -5,6 +5,7 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.LoadResponse.Companion.addScore
+import com.lagradost.cloudstream3.LoadResponse.Companion.addDuration
 import com.lagradost.cloudstream3.extractors.helper.AesHelper
 import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
@@ -244,6 +245,7 @@ class XilidProvider : MainAPI() {
                 this.plot = description
                 this.tags = tags
                 addScore(rating)
+                addDuration(runtime)
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
@@ -255,6 +257,7 @@ class XilidProvider : MainAPI() {
                 this.plot = description
                 this.tags = tags
                 addScore(rating)
+                addDuration(runtime)
                 addActors(actors)
                 this.recommendations = recommendation
                 addTrailer(trailer)
