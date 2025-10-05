@@ -246,7 +246,7 @@ class XilidProvider : MainAPI() {
                 this.plot = description
                 this.tags = tags
                 addScore(rating)
-                addDuration(runtime)
+                addDuration(duration)
                 addActors(actors)
                 this.contentRating = crating
                 this.recommendations = recommendation
@@ -259,7 +259,7 @@ class XilidProvider : MainAPI() {
                 this.plot = description
                 this.tags = tags
                 addScore(rating)
-                addDuration(runtime)
+                addDuration(duration)
                 addActors(actors)
                 this.contentRating = crating
                 this.recommendations = recommendation
