@@ -178,6 +178,10 @@ class XilidProvider : MainAPI() {
 
         val description = document.select("div.wp-content > p").text().trim()
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
+        //add option to get trailer from loadUrl in some cases (dooplayer)
+        
+        val runtime = document.selectFirst("span[itemprop=duration]")?.text()
+                        ?.replace(Regex("\\D"), "").orEmpty()
         val rating = document.selectFirst("span.dt_rating_vgs")?.text()
 
         val actors = document.select("div.persons > div[itemprop=actor]").map {
