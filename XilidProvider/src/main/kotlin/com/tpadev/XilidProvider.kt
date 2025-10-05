@@ -181,8 +181,9 @@ class XilidProvider : MainAPI() {
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
         //add option to get trailer from loadUrl in some cases (dooplayer)
         
-        val runtime = document.selectFirst("span[itemprop=duration]")?.text()
-                        ?.replace(Regex("\\D"), "").orEmpty()
+        val duration = document.selectFirst("div.extra span[itemprop=duration]")?.text().orEmpty()
+//                        ?.replace(Regex("\\D"), "")
+        val crating = document.selectFirst("div.extra span[itemprop=contentRating]")?.text().orEmpty()
         val rating = document.selectFirst("span.dt_rating_vgs")?.text()
 
         val actors = document.select("div.persons > div[itemprop=actor]").map {
@@ -247,6 +248,7 @@ class XilidProvider : MainAPI() {
                 addScore(rating)
                 addDuration(runtime)
                 addActors(actors)
+                this.contentRating = crating
                 this.recommendations = recommendation
                 addTrailer(trailer)
             }
@@ -259,6 +261,7 @@ class XilidProvider : MainAPI() {
                 addScore(rating)
                 addDuration(runtime)
                 addActors(actors)
+                this.contentRating = crating
                 this.recommendations = recommendation
                 addTrailer(trailer)
             }
