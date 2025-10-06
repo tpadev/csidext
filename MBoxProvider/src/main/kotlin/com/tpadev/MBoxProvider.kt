@@ -272,6 +272,7 @@ class MBoxProvider : MainAPI() {
             data.resource?.seasons == null || data.resource.seasons.find { it?.maxEp == 0 || it?.se == 0 } != null
         val type = getTvType(data.subject?.genre, isMovie)
         val year = data.subject?.releaseDate?.getYear()
+        val duration = data.subject?.duration
         val actors = data.stars
             ?.filterNotNull()
             ?.map {
@@ -323,6 +324,7 @@ class MBoxProvider : MainAPI() {
             backgroundPosterUrl = tracker?.cover
             posterUrl = tracker?.image ?: data.metadata?.image
             this.year = year
+            this.duration = duration
             addEpisodes(DubStatus.Subbed, episodes)
             addSeasonNames(seasons)
             addActors(actors)
