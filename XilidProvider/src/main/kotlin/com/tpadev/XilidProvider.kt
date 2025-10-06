@@ -5,7 +5,6 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.LoadResponse.Companion.addScore
-import com.lagradost.cloudstream3.LoadResponse.Companion.addDuration
 import com.lagradost.cloudstream3.extractors.helper.AesHelper
 import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
@@ -184,6 +183,7 @@ class XilidProvider : MainAPI() {
         val duration = document.selectFirst("div.extra span[itemprop=duration]")?.text()
                         ?.replace(Regex("\\D"), "")
                         ?.toIntOrNull() ?: 0
+        println(duration)
         val crating = document.selectFirst("div.extra span[itemprop=contentRating]")?.text().orEmpty()
         val rating = document.selectFirst("span.dt_rating_vgs")?.text()
 
