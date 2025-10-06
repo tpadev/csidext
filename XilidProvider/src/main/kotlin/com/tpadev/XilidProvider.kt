@@ -181,8 +181,9 @@ class XilidProvider : MainAPI() {
         val trailer = document.selectFirst("div.embed iframe")?.attr("src")
         //add option to get trailer from loadUrl in some cases (dooplayer)
         
-        val duration = document.selectFirst("div.extra span[itemprop=duration]")?.text().orEmpty()
-//                        ?.replace(Regex("\\D"), "")
+        val duration = document.selectFirst("div.extra span[itemprop=duration]")?.text()
+                        ?.replace(Regex("\\D"), "")
+                        ?.toIntOrNull() ?: 0
         val crating = document.selectFirst("div.extra span[itemprop=contentRating]")?.text().orEmpty()
         val rating = document.selectFirst("span.dt_rating_vgs")?.text()
 
@@ -245,9 +246,9 @@ class XilidProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                addScore(rating)
-                addDuration(duration)
+                addScore(rating)                
                 addActors(actors)
+                this.duration = duration
                 this.contentRating = crating
                 this.recommendations = recommendation
                 addTrailer(trailer)
@@ -259,8 +260,8 @@ class XilidProvider : MainAPI() {
                 this.plot = description
                 this.tags = tags
                 addScore(rating)
-                addDuration(duration)
                 addActors(actors)
+                this.duration = duration
                 this.contentRating = crating
                 this.recommendations = recommendation
                 addTrailer(trailer)
